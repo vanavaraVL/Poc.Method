@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\contracts\Poc.Method.Core\Poc.Method.Core.csproj" />
+    <ProjectReference Include="..\..\..\contracts\resource-access\Poc.Method.ContextStorageAccess\Poc.Method.ContextStorageAccess.csproj" />
+    <ProjectReference Include="..\..\..\dal\Poc.Method.Dal.Sql\Poc.Method.Dal.Sql.csproj" />
+  </ItemGroup>
+
+</Project>

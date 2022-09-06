@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\contracts\managers\Poc.Method.CompanyManager\Poc.Method.CompanyManager.csproj" />
+    <ProjectReference Include="..\..\..\contracts\resource-access\Poc.Method.ContextStorageAccess\Poc.Method.ContextStorageAccess.csproj" />
+    <ProjectReference Include="..\..\..\contracts\resource-access\Poc.Method.ExternalAppRedAccess\Poc.Method.ExternalAppRedAccess.csproj" />
+    <ProjectReference Include="..\..\..\contracts\resource-access\Poc.Method.ExternalAppYellowAccess\Poc.Method.ExternalAppYellowAccess.csproj" />
+  </ItemGroup>
+
+</Project>

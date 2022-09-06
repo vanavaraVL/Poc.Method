@@ -1,0 +1,20 @@
+# tye application configuration file
+# read all about it at https://github.com/dotnet/tye
+#
+# when you've given us a try, we'd love to know what you think:
+#    https://aka.ms/AA7q20u
+#
+name: poc.method.platform
+services:
+- name: poc-method-appredapi
+  project: src/apps/externals/Poc.Method.AppRedAPI/Poc.Method.AppRedAPI.csproj
+  dockerFileContext: .
+- name: poc-method-appyellowapi
+  project: src/apps/externals/Poc.Method.AppYellowAPI/Poc.Method.AppYellowAPI.csproj
+  dockerFileContext: .
+- name: api
+  project: src/apps/API/API.csproj
+  dockerFileContext: .
+- name: web
+  project: src/apps/Web/Web.csproj
+  dockerFileContext: .

@@ -1,0 +1,74 @@
+﻿@page "/fetchemployers"
+
+@using Web.Services
+
+@inject IHttpApiClient _httpClient
+
+<h3>Employers</h3>
+
+<div class="row">
+    <div class="col-md-6">
+        <a href='/employer/add' class="btn btn-primary" role="button">
+            <i class="fas fa-user-plus"></i>
+            Add Employer
+        </a>
+    </div>
+</div>
+<br />
+
+@if (_companyList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (_companyList.Length > 0)
+{
+    <table class="table table-striped align-middle table-bordered">
+        <thead class="table-success">
+        <tr class="text-center">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>AdditionInfo</th>
+            <th>UpdatedAt</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var emp in _companyList)
+        {
+            <tr class="text-center">
+                <td>@emp.Id</td>
+                <td>@emp.Name</td>
+                <td>@emp.Description</td>
+                <td>@emp.AdditionInfo</td>
+                <td>@emp.UpdatedAt?.ToString()</td>
+                <td>
+                    <a href='/employer/edit/@emp.Id' class="btn btn-outline-dark" role="button">Details</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="d-flex justify-content-center">
+        <h4>No record found</h4>
+    </div>
+}
+
+@code {
+    private CompanyDto[]? _companyList;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetCompanyList();
+    }
+
+    private async Task GetCompanyList()
+    {
+        var result = await _httpClient.CompanyClient.GetCompanListAsync();
+
+        _companyList = result.Data.ToArray();
+    }
+}

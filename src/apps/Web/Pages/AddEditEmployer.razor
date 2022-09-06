@@ -1,0 +1,210 @@
+﻿@page "/employer/add"
+@page "/employer/edit/{CompanyId:int}"
+
+@using Web.Services
+
+@inject IHttpApiClient _httpClient
+@inject NavigationManager _urlNavigationManager
+
+
+<h3>Employer details: @_title</h3>
+
+<hr />
+
+@if (!_isLoading)
+{
+    <EditForm Model="@_companyInfo" OnValidSubmit="SaveEmployer">
+        <div class="mb-3">
+            <label for="Name" class="form-label">Name</label>
+            <div class="col-md-4">
+                <InputText class="form-control" @bind-Value="_companyInfo.Name"/>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="Description" class="form-label">Description</label>
+            <div class="col-md-4">
+                <InputText class="form-control" @bind-Value="_companyInfo.Description"/>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="AdditionInfo" class="form-label">Addition information</label>
+            <div class="col-md-4">
+                <InputText class="form-control" @bind-Value="_companyInfo.AdditionInfo"/>
+            </div>
+        </div>
+
+        <hr/>
+
+        @if (CompanyId != default)
+        {
+            <h3>Employees</h3>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#newEmployeeModal"
+                            @onclick="(() => PreparePerson(CompanyId))">
+                        Add new person
+                    </button>
+                </div>
+            </div>
+            <br/>
+        }
+
+        @if (_companyInfo.Persons != null && _companyInfo.Persons.Any())
+        {
+            <table class="table table-striped align-middle table-bordered">
+                <thead class="table-success">
+                <tr class="text-center">
+                    <th>ID</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>UpdatedAt</th>
+                    <th>AdditionInfo</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var person in _companyInfo.Persons)
+                {
+                    <tr class="text-center">
+                        <td>@person.Id</td>
+                        <td>@person.FirstName</td>
+                        <td>@person.LastName</td>
+                        <td>@person.UpdatedAt?.ToString()</td>
+                        <td>@person.AdditionInfo</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
+
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-light" @onclick="GoBackToCompanyList">Cancel</button>
+        </div>
+    </EditForm>
+
+
+    <div class="modal fade" id="newEmployeeModal" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Add new Employee</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <EditForm Model="@_personRequest" OnValidSubmit="() => { }">
+                        <div class="mb-3">
+                            <label for="Name" class="form-label">First name</label>
+                            <div class="col-md-4">
+                                <InputText class="form-control" @bind-Value="_personRequest.FirstName"/>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="Description" class="form-label">Last name</label>
+                            <div class="col-md-4">
+                                <InputText class="form-control" @bind-Value="_personRequest.LastName"/>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="AdditionInfo" class="form-label">Addition information</label>
+                            <div class="col-md-4">
+                                <InputText class="form-control" @bind-Value="_personRequest.AdditionInfo"/>
+                            </div>
+                        </div>
+                    </EditForm>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" @onclick="(async () => await CreateNewPerson())" data-bs-dismiss="modal">Add</button>
+                    <button class="btn btn-warning" data-bs-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <p><em>Loading...</em></p>
+}
+
+@code {
+    private CompanyInfoDto _companyInfo = new CompanyInfoDto();
+    private CreatePersonRequest _personRequest = new CreatePersonRequest();
+
+    private string _title = "add new";
+    private bool _isLoading = true;
+
+    [Parameter]
+    public int CompanyId { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (CompanyId != default)
+        {
+            _title = "edit existing";
+
+            await GetCompanyInfo();
+        }
+        else
+        {
+            _isLoading = false;
+        }
+    }
+
+    private async Task GetCompanyInfo()
+    {
+        try
+        {
+            _isLoading = true;
+
+            var result = await _httpClient.CompanyClient.GetCompanyDetailAsync(CompanyId, 10);
+
+            _companyInfo = result;
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+
+    private void GoBackToCompanyList()
+    {
+        _urlNavigationManager.NavigateTo("/fetchemployers");
+    }
+
+
+    private async Task SaveEmployer()
+    {
+        if (_personRequest.CompanyId != default)
+        {
+            return;
+        }
+
+        if (_companyInfo.Id == 0)
+        {
+            await _httpClient.CompanyClient.CreateCompanyAsync(new CreateCompanyRequest()
+            {
+                AdditionInfo = _companyInfo.AdditionInfo,
+                Description = _companyInfo.Description,
+                Name = _companyInfo.Name
+            });
+        }
+
+        GoBackToCompanyList();
+    }
+
+    private void PreparePerson(int companyId)
+    {
+        _personRequest = new CreatePersonRequest()
+        {
+            CompanyId = companyId
+        };
+    }
+
+    private async Task CreateNewPerson()
+    {
+        await _httpClient.PersonClient.CreatePersonAsync(_personRequest);
+
+        await GetCompanyInfo();
+    }
+}

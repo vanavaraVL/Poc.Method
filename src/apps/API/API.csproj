@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>59b1f3a9-594c-4e3f-8cf1-db31f9409ea6</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\..</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.Tye.Extensions.Configuration" Version="0.10.0-alpha.21420.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\services\managers\Poc.Method.CompanyManagerService\Poc.Method.CompanyManagerService.csproj" />
+    <ProjectReference Include="..\..\services\managers\Poc.Method.PersonManagerService\Poc.Method.PersonManagerService.csproj" />
+    <ProjectReference Include="..\..\services\resource-access\Poc.Method.Service.ContextStorageAccess\Poc.Method.Service.ContextStorageAccess.csproj" />
+    <ProjectReference Include="..\..\services\resource-access\Poc.Method.Service.ExternalAppRedAccess\Poc.Method.Service.ExternalAppRedAccess.csproj" />
+    <ProjectReference Include="..\..\services\resource-access\Poc.Method.Service.ExternalAppYellowAccess\Poc.Method.Service.ExternalAppYellowAccess.csproj" />
+  </ItemGroup>
+
+</Project>
