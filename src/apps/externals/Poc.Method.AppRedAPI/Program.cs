@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using Poc.Method.Dal.Sql;
 using Poc.Method.Dal.Sql.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +20,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.RegisterStorageContext(builder.Configuration);
 
 var app = builder.Build();
+
+var context = app.Services.GetRequiredService<StorageContext>();
+
+context.Database.Migrate();
+context.Database.Migrate();
 
 app.UseRouting();
 app.UseCors(cors => cors

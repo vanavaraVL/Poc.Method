@@ -1,5 +1,7 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Poc.Method.CompanyManagerService.Extensions;
+using Poc.Method.Dal.Sql;
 using Poc.Method.Dal.Sql.Extensions;
 using Poc.Method.PersonManagerService.Extensions;
 using Poc.Method.Service.ContextStorageAccess.Extensions;
@@ -61,6 +63,11 @@ builder.Services.AddSingleton(sp =>
 
 
 var app = builder.Build();
+
+var context = app.Services.GetRequiredService<StorageContext>();
+
+context.Database.Migrate();
+context.Database.Migrate();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
