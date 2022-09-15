@@ -64,10 +64,12 @@ builder.Services.AddSingleton(sp =>
 
 var app = builder.Build();
 
-var context = app.Services.GetRequiredService<StorageContext>();
-
-context.Database.Migrate();
-context.Database.Migrate();
+// migrate any database changes on startup (includes initial db creation)
+using (var scope = app.Services.CreateScope())
+{
+    var dataContext = scope.ServiceProvider.GetRequiredService<StorageContext>();
+    dataContext.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
