@@ -5,4 +5,7 @@
 
 The power of developer’s tool for micro-service architecture
 
-PS. Please, don’t forget to add feedback for MS Team =)
+- [Configuration](./tye.yaml)\
+An example of tye configuration of that project
+
+PS. Please, don’t forget to add awesome feedback for MS Team =)
