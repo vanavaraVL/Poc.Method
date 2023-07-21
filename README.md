@@ -5,12 +5,11 @@ We have companies which are employers\
 We have persons who are employees
 
 **Requirements**
-- White list:
+- White list:\
 We know exactly all business logic of creating companies, fetching companies and getting companies details
 
-- Gray list:
-But we don't know anything about the business logic of getting employees from the particular company.
-
+- Gray list:\
+But we don't know anything about the business logic of getting employees from the particular company.\
 Imagine that this is a part of knowledge of some legacy system or in general words external resource.
 
 # What we are going to achieve
