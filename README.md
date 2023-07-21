@@ -58,7 +58,7 @@ For the user it looks like he acts with only one source
 - [Describes the contracts of Managers](./src/contracts/managers)
 - [Implements the contracts of Managers](./src/services/managers)
 
-- Managers are being devided by Domain Subject:
+Managers are being devided by Domain Subject:
   - [Company Managers](./src/services/managers/Poc.Method.CompanyManagerService)
   - [Person Managers](./src/services/managers/Poc.Method.PersonManagerService)
 
