@@ -55,13 +55,8 @@ For the user it looks like he acts with only one source
 
 ## Services
 
-- [Managers contracts](./src/contracts/managers)\
-
-- [Managers](./src/services/managers)\
-
-Describe the contracts of Managers
-
-Implement the main chain of IDesign pattern:
+- [Describes the contracts of Managers](./src/contracts/managers)\
+- [Implements the contracts of Managers](./src/services/managers)\
 
 - Managers are being devided by Domain Subject:
   - [Company Managers](./src/services/managers/Poc.Method.CompanyManagerService)\
@@ -69,11 +64,8 @@ Implement the main chain of IDesign pattern:
 
 ## Resource accessors
 
-- [Resource accessors contracts](./src/contracts/resource-access)\
-
-- [Resource-accessors](./src/services/resource-access)\
-
-Describe the contracts of Managers
+- [Describes the contracts of Resource Accessors](./src/contracts/resource-access)\
+- [Implements the contracts of Resource Accessors](./src/services/resource-access)\
 
 Mainly these accessors allow to perform actions on our own resources or externals
 
@@ -88,7 +80,7 @@ Here we know that:
 
 ## Data access layers
 
-- [Dal](./src/dal/resource-access)\
+- [Dal](./src/dal)\
 Provides low access to the SQL database and is being used by our own resource accessors
 
 
