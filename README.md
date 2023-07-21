@@ -55,24 +55,24 @@ For the user it looks like he acts with only one source
 
 ## Services
 
-- [Describes the contracts of Managers](./src/contracts/managers)\
-- [Implements the contracts of Managers](./src/services/managers)\
+- [Describes the contracts of Managers](./src/contracts/managers)
+- [Implements the contracts of Managers](./src/services/managers)
 
 - Managers are being devided by Domain Subject:
-  - [Company Managers](./src/services/managers/Poc.Method.CompanyManagerService)\
-  - [Person Managers](./src/services/managers/Poc.Method.PersonManagerService)\
+  - [Company Managers](./src/services/managers/Poc.Method.CompanyManagerService)
+  - [Person Managers](./src/services/managers/Poc.Method.PersonManagerService)
 
 ## Resource accessors
 
-- [Describes the contracts of Resource Accessors](./src/contracts/resource-access)\
-- [Implements the contracts of Resource Accessors](./src/services/resource-access)\
+- [Describes the contracts of Resource Accessors](./src/contracts/resource-access)
+- [Implements the contracts of Resource Accessors](./src/services/resource-access)
 
 Mainly these accessors allow to perform actions on our own resources or externals
 
 - Accessors are being devided by our knowledges of how many sources we have:
-  - [Red resource](./src/services/resource-access/Poc.Method.Service.ExternalAppRedAccess)\
-  - [Yellow resource](./src/services/resource-access/Poc.Method.Service.ExternalAppYellowAccess)\
-  - [Our own resource](./src/services/resource-access/Poc.Method.Service.ContextStorageAccess)\
+  - [Red resource](./src/services/resource-access/Poc.Method.Service.ExternalAppRedAccess)
+  - [Yellow resource](./src/services/resource-access/Poc.Method.Service.ExternalAppYellowAccess)
+  - [Our own resource](./src/services/resource-access/Poc.Method.Service.ContextStorageAccess)
 
 Here we know that:
 - Red and Yellow are externals and we use HttpClient to reach out remote hosts.
