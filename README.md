@@ -9,13 +9,17 @@ We have persons who are employees
 We know exactly all business logic of creating companies, fetching companies and getting companies details
 
 - Gray list:
-But we don't know anything about the business logic of getting employees from the particular company.\
+But we don't know anything about the business logic of getting employees from the particular company.
+
 Imagine that this is a part of knowledge of some legacy system or in general words external resource.
 
 # What we are going to achieve
 
-We want to build modern up-to date application which allows to implement our well-known business and let perform bad-known logic in the old system.\
-Old system parts will be reimplemented in the further steps.\But at present moment of time we are going to use them as external resources.
+We want to build modern up-to date application which allows to implement our well-known business and let perform bad-known logic in the old system.
+
+Old system parts will be reimplemented in the further steps.
+
+But at present moment of time we are going to use them as external resources.
 
 # IDesign
 
